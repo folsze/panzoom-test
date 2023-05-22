@@ -1,0 +1,7 @@
+{
+  "name": "panzoom-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
