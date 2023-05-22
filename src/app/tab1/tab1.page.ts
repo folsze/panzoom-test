@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import panzoom from 'panzoom';
 
 @Component({
   selector: 'app-tab1',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
 export class Tab1Page {
 
   constructor() {}
+
+  setupPanzoom() {
+    const panzoom1 = panzoom(document.querySelector('#panzoom-element')!);
+
+  }
 
 }
