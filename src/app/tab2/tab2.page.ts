@@ -10,7 +10,9 @@ export class Tab2Page implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  setupPanzoom(event: any) {
     const svg = document.querySelector('#panzoom-element')! as HTMLElement;
     const step = 1;
     Panzoom(svg, {
@@ -19,5 +21,7 @@ export class Tab2Page implements OnInit {
       contain: 'outside',
       step,
     });
+    console.log('DONE');
   }
+
 }

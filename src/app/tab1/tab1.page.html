@@ -6,12 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content scroll-y="false" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Anvaka Panzoom</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <img id="panzoom-element" ngSrc="assets/id1.svg" alt="" height="413" width="800">
+  <div id="panzoom-element" [inlineSVG]="'assets/id1.svg'" (onSVGInserted)="setupPanzoom($event)"></div>
 </ion-content>

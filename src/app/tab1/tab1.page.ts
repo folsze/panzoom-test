@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import panzoom from 'panzoom';
 
 @Component({
@@ -6,13 +6,14 @@ import panzoom from 'panzoom';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
   constructor() {}
 
-  setupPanzoom() {
+  setupPanzoom(event: any) {
     const panzoom1 = panzoom(document.querySelector('#panzoom-element')!);
-
   }
+
+  ngOnInit(): void {}
 
 }
