@@ -1,17 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Timmywil Panzoom
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content scroll-y="false" [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Timmywil Panzoom</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="panzoom-element" [inlineSVG]="'assets/id1.svg'" (onSVGInserted)="setupPanzoom($event)"></div>
+<ion-content scroll-y="false">
+  <div class="outermost-container">
+    <ion-button (click)="panToTarget()">(this is timywil) panToTarget</ion-button>
+    <ion-button (click)="zoomIn()">zoomIn</ion-button>
+    <ion-button (click)="zoomOut()">zoomOut</ion-button>
+    <ion-button (click)="reset()">reset</ion-button>
+    <div id="panzoom-element" [inlineSVG]="'assets/id2.svg'"
+         [onSVGLoaded]="onSvgLoaded"
+    ></div>
+  </div>
 </ion-content>
