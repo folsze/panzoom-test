@@ -4,8 +4,13 @@
     <ion-button (click)="zoomIn()">zoomIn</ion-button>
     <ion-button (click)="zoomOut()">zoomOut</ion-button>
     <ion-button (click)="reset()">reset</ion-button>
+    <ion-button (click)="pan()">pan</ion-button>
+    <ion-button (click)="zoom()">zoom</ion-button>
     <div id="panzoom-element" [inlineSVG]="'assets/id2.svg'"
          [onSVGLoaded]="onSvgLoaded"
     ></div>
   </div>
+
+  <input type="number" [(ngModel)]="x" name="x">
+  <input type="number" [(ngModel)]="y" name="y">
 </ion-content>

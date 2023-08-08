@@ -18,6 +18,8 @@ export class Tab2Page implements OnInit {
   private panStartX: number;
   // @ts-ignore
   private panStartY: number;
+  public x: number = 500;
+  public y: number = 500;
 
   constructor() {}
 
@@ -77,28 +79,50 @@ export class Tab2Page implements OnInit {
     // Get the SVG path element
     // @ts-ignore
     let svgPath = document.getElementById('Tirol')! as SVGPathElement;
-// Get SVG path bounding box (position and dimensions)
-    console.log(svgPath);
+
+    // Get SVG path bounding box (position and dimensions)
     let bbox = svgPath.getBBox();
-// Get viewport dimensions
-    let viewportWidth = window.innerWidth;
-    let viewportHeight = window.innerHeight;
-// Calculate x, y to center the SVG path in the viewport
-    let x = (viewportWidth / 2) - (bbox.x + bbox.width / 2);
-    let y = (viewportHeight / 2) - (bbox.y + bbox.height / 2);
-// Pan to the calculated x, y
+
+    // Get the SVG element's dimensions and position
+    let svgRect = this.panzoomElement.getBoundingClientRect();
+    let svgWidth = svgRect.width;
+    let svgHeight = svgRect.height;
+
+    // Calculate x, y to center the SVG path in the SVG
+    let x = (svgWidth / 2) - (bbox.x + bbox.width / 2);
+    let y = (svgHeight / 2) - (bbox.y + bbox.height / 2);
+
+    // Calculate center point of the SVG path, relative to the SVG's top-left corner
+    let centerX = bbox.x + bbox.width / 2 + svgRect.left;
+    let centerY = bbox.y + bbox.height / 2 + svgRect.top;
+
+    // Adjust for panzoom's coordinate system (origin in the middle)
+    let panzoomCenterX = centerX - svgWidth / 2;
+    let panzoomCenterY = centerY - svgHeight / 2;
+
+    // Convert SVG's coordinate system to panzoom's
+    let panzoomCenterXAdjusted = panzoomCenterX - svgWidth / 2;
+    let panzoomCenterYAdjusted = panzoomCenterY - svgHeight / 2;
+
+    // Log calculated values
     console.log(
       'bbox', bbox,
-      'viewportWidth', viewportWidth,
-      'viewportHeight', viewportHeight,
+      'svgWidth', svgWidth,
+      'svgHeight', svgHeight,
       'x', x,
-      'y', y
+      'y', y,
+      'centerX', centerX,
+      'centerY', centerY,
+      'panzoomCenterX', panzoomCenterX,
+      'panzoomCenterY', panzoomCenterY,
+      'panzoomCenterXAdjusted', panzoomCenterXAdjusted,
+      'panzoomCenterYAdjusted', panzoomCenterYAdjusted
     );
 
-    // this.panzoomController.zoomIn();
-    // this.panzoomController.zoom(0.5, { animate: true });
-    this.panzoomController.pan(-10, -10, {force: true});
+    // Zoom to the center of the SVG path using panzoom's adjusted coordinate system
+    this.panzoomController.zoom(2, {animate: true, focal: {x: panzoomCenterXAdjusted, y: panzoomCenterYAdjusted}});
   }
+
 
   reset() {
     this.panzoomController.reset();
@@ -106,5 +130,14 @@ export class Tab2Page implements OnInit {
 
   zoomOut() {
     this.panzoomController.zoomOut({ animate: true });
+  }
+
+  pan() {
+    this.panzoomController.pan(0,0);
+  }
+
+  zoom() {
+    console.log(this.x, this.y);
+    this.panzoomController.zoom(1.5, {animate: true, focal: {x: this.x, y: this.y}});
   }
 }
